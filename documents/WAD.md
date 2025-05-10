@@ -69,9 +69,74 @@ Critério de aceite 03|Ao concluir todas as subtarefas, a tarefa principal é ma
 
 ### 3.1. Modelagem do banco de dados  (Semana 3)
 
-*Posicione aqui os diagramas de modelos relacionais do seu banco de dados, apresentando todos os esquemas de tabelas e suas relações. Utilize texto para complementar suas explicações, se necessário.*
+Um banco de dados é uma coleção organizada de dados. Seu principal objetivo é armazenar informações de maneira estruturada para facilitar consultas e manipulação por sistemas computacionais. Os bancos de dados são fundamentais em aplicações modernas, permitindo persistência de dados, integridade e escalabilidade.
 
-*Posicione também o modelo físico com o Schema do BD (arquivo .sql)*
+#### Modelo relacional
+
+O modelo de banco de dados é a forma como os dados são estruturados e organizados dentro do banco. Ele define a lógica de como os dados se relacionam entre si.
+
+O modelo lógico representa a estrutura do banco de dados com foco nas entidades, atributos e nos relacionamentos entre elas. Ele é independente do sistema gerenciador de banco de dados (SGBD) utilizado. No modelo lógico: Entidades viram tabelas, atributos viram colunas e relacionamentos viram chaves estrangeiras ou tabelas intermediárias.
+
+<div align= "center">
+<img src="../assets/banco-modelo.png">
+</div>
+
+#### Modelo físico
+
+O modelo relacional é a implementação prática do modelo lógico em um SGBD. Nele, todas as entidades e relacionamentos são convertidos em tabelas com tipos de dados específicos, constraints (como PRIMARY KEY, FOREIGN KEY, NOT NULL) e relacionamentos reais.
+
+```sql
+    CREATE TABLE IF NOT EXISTS usuario (
+    id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    nascimento DATE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS endereco (
+    id INT PRIMARY KEY,
+    rua VARCHAR(100) NOT NULL,
+    numero INT NOT NULL,
+    bairro VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS evento (
+    id INT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    data_inicio DATE NOT NULL,
+    data_final DATE NOT NULL,
+    prioridade VARCHAR(20),
+    id_usuario INT NOT NULL,
+    id_endereco INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_endereco) REFERENCES endereco(id)
+);
+
+CREATE TABLE IF NOT EXISTS task (
+    id INT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    confirmar BOOLEAN DEFAULT 0,
+    data DATE NOT NULL,
+    id_usuario INT NOT NULL,
+    id_evento INT,
+    id_anotacao INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_evento) REFERENCES evento(id),
+    FOREIGN KEY (id_anotacao) REFERENCES anotacao(id)
+);
+
+CREATE TABLE IF NOT EXISTS anotacao (
+    id INT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    id_task INT,
+    id_evento INT,
+    FOREIGN KEY (id_task) REFERENCES task(id),
+    FOREIGN KEY (id_evento) REFERENCES evento(id)
+);
+```
 
 ### 3.1.1 BD e Models (Semana 5)
 *Descreva aqui os Models implementados no sistema web*
