@@ -154,7 +154,45 @@ CREATE TABLE IF NOT EXISTS anotacao (
 
 ### 3.3. Wireframes (Semana 03)
 
-*Posicione aqui as imagens do wireframe construído para sua solução e, opcionalmente, o link para acesso (mantenha o link sempre público para visualização).*
+#### wireframe da tela inicial
+
+A imagem abaixo é o wireframe da tela inicial. Após fazer login, esta será a primeira tela exibida. Nela, é possível visualizar um grande calendário, onde o usuário poderá anotar os eventos que terá ao longo do mês. Logo abaixo, há alguns retângulos com textos, que servem para o usuário fazer anotações relacionadas aos eventos que irá ou está participando. À direita, é possível observar uma seção destinada às tarefas (tasks), onde serão exibidas as atividades que o usuário precisa realizar naquele dia, de acordo com o calendário ou com alguma tarefa previamente criada. Esse quadro de tarefas está alinhado com a necessidade descrita na user story 3.
+
+<div align= "center">
+<img src="../assets/wireframe1.png">
+</div>
+
+#### wireframe da tela inicial com o menu da conta aberto
+
+Nesta tela, o menu da conta está aberto, exibindo apenas dois botões: um para efetuar o logout e outro para visualizar os detalhes da conta.
+
+<div align= "center">
+<img src="../assets/wireframe2.png">
+</div>
+
+#### wireframe da tela inicial com o menu de notificações aberto
+
+Aqui, o menu de notificações está aberto. Nele, será possível visualizar as tarefas que estão atrasadas ou próximas do prazo final. Isso está alinhado com a User Story 2, que solicita uma barra de notificações para que o usuário não perca os prazos.
+
+<div align= "center">
+<img src="../assets/wireframe3.png">
+</div>
+
+#### wireframe da tela de criar anotação 
+
+Esta tela aparece quando o usuário cria uma nova anotação, permitindo que ele insira as informações que considerar necessárias.
+
+<div align= "center">
+<img src="../assets/wireframe4.png">
+</div>
+
+#### wireframe da tela de perfil
+
+Nesta tela, o usuário terá acesso às informações da sua conta, caso queira editar algum dado ou apenas relembrar alguma informação de cadastro que tenha esquecido.
+
+<div align= "center">
+<img src="../assets/wireframe5.png">
+</div>
 
 ### 3.4. Guia de estilos (Semana 05)
 
