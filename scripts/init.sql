@@ -1,51 +1,30 @@
-CREATE TABLE IF NOT EXISTS usuario (
-    id INT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    nascimento DATE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(100) NOT NULL
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE IF NOT EXISTS users (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS endereco (
-    id INT PRIMARY KEY,
-    rua VARCHAR(100) NOT NULL,
-    numero INT NOT NULL,
-    bairro VARCHAR(100)
-);
-
-CREATE TABLE IF NOT EXISTS evento (
-    id INT PRIMARY KEY,
-    titulo VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    data_inicio DATE NOT NULL,
-    data_final DATE NOT NULL,
-    prioridade VARCHAR(20),
-    id_usuario INT NOT NULL,
-    id_endereco INT,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    FOREIGN KEY (id_endereco) REFERENCES endereco(id)
-);
-
-CREATE TABLE IF NOT EXISTS task (
-    id INT PRIMARY KEY,
-    titulo VARCHAR(100) NOT NULL,
-    confirmar BOOLEAN DEFAULT 0,
-    data DATE NOT NULL,
-    id_usuario INT NOT NULL,
-    id_evento INT,
-    id_anotacao INT,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-    FOREIGN KEY (id_evento) REFERENCES evento(id),
-    FOREIGN KEY (id_anotacao) REFERENCES anotacao(id)
-);
-
-CREATE TABLE IF NOT EXISTS anotacao (
-    id INT PRIMARY KEY,
-    titulo VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    id_task INT,
-    id_evento INT,
-    FOREIGN KEY (id_task) REFERENCES task(id),
-    FOREIGN KEY (id_evento) REFERENCES evento(id)
-);
-
+INSERT INTO users (name, email)
+VALUES 
+  ('Alice Smith', 'alice.smith@example.com'),
+  ('Bob Johnson', 'bob.johnson@example.com'),
+  ('Carol Williams', 'carol.williams@example.com'),
+  ('David Jones', 'david.jones@example.com'),
+  ('Emma Brown', 'emma.brown@example.com'),
+  ('Frank Davis', 'frank.davis@example.com'),
+  ('Grace Wilson', 'grace.wilson@example.com'),
+  ('Henry Moore', 'henry.moore@example.com'),
+  ('Isabella Taylor', 'isabella.taylor@example.com'),
+  ('Jack Lee', 'jack.lee@example.com'),
+  ('Kate Clark', 'kate.clark@example.com'),
+  ('Liam Martinez', 'liam.martinez@example.com'),
+  ('Mia Rodriguez', 'mia.rodriguez@example.com'),
+  ('Noah Garcia', 'noah.garcia@example.com'),
+  ('Olivia Hernandez', 'olivia.hernandez@example.com'),
+  ('Patrick Martinez', 'patrick.martinez@example.com'),
+  ('Quinn Lopez', 'quinn.lopez@example.com'),
+  ('Rose Thompson', 'rose.thompson@example.com'),
+  ('Samuel Perez', 'samuel.perez@example.com'),
+  ('Tara Scott', 'tara.scott@example.com');
