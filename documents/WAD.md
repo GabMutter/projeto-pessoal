@@ -186,22 +186,37 @@ Esta tela aparece quando o usuário cria uma nova anotação, permitindo que ele
 <img src="../assets/wireframe4.png">
 </div>
 
-#### wireframe da tela de perfil
-
-Nesta tela, o usuário terá acesso às informações da sua conta, caso queira editar algum dado ou apenas relembrar alguma informação de cadastro que tenha esquecido.
-
-<div align= "center">
-<img src="../assets/wireframe5.png">
-</div>
-
 ### 3.4. Guia de estilos (Semana 05)
 
-*Descreva aqui orientações gerais para o leitor sobre como utilizar os componentes do guia de estilos de sua solução.*
+Este guia de estilos tem como objetivo padronizar o desenvolvimento visual e técnico do sistema, garantindo uma aparência consistente, uma melhor organização do código e uma experiência de usuário unificada em todas as partes do projeto.
 
+<a href = "https://www.figma.com/design/UuUwHlxcbYgIYmgJYQ21EX/Untitled?node-id=0-1&t=C88TsD9gcdeJ5TB2-1"> Clique aqui para ver o guia de estilo. </a>
 
 ### 3.5. Protótipo de alta fidelidade (Semana 05)
 
-*Posicione aqui algumas imagens demonstrativas de seu protótipo de alta fidelidade e o link para acesso ao protótipo completo (mantenha o link sempre público para visualização).*
+#### protótipo da tela inicial
+
+<div align= "center">
+<img src="../assets/prototipo1.png">
+</div>
+
+#### protótipo da tela de criar anotação
+
+<div align= "center">
+<img src="../assets/prototipo2.png">
+</div>
+
+#### protótipo da tela inicial com o menu de notificações aberto
+
+<div align= "center">
+<img src="../assets/prototipo3.png">
+</div>
+
+#### protótipo da tela inicial com o menu da conta aberto
+
+<div align= "center">
+<img src="../assets/prototipo4.png">
+</div>
 
 ### 3.6. WebAPI e endpoints (Semana 05)
 
