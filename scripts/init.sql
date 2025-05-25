@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS anotacaos (
     descricao TEXT,
     id_task INT,
     id_evento INT,
+    FOREIGN KEY (id_task) REFERENCES tasks(id)
     FOREIGN KEY (id_evento) REFERENCES eventos(id)
 );
 
