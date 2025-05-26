@@ -139,18 +139,56 @@ CREATE TABLE IF NOT EXISTS anotacao (
 ```
 
 ### 3.1.1 BD e Models (Semana 5)
-*Descreva aqui os Models implementados no sistema web*
+
+O Model é a camada responsável pela manipulação dos dados em uma aplicação. Ele define a estrutura dos dados, incorpora as regras de negócio, executa operações de acesso ao banco de dados e implementa a lógica de processamento. Essa camada funciona de forma independente da interface do usuário, interagindo com o controlador para receber as requisições, processá-las e retornar os resultados que serão exibidos na visualização. O Model exerce um papel fundamental na separação de responsabilidades, o que contribui para a modularidade e a fácil manutenção do código, além de facilitar a reutilização e a realização de testes automatizados.
+
+#### usuário
+
+- getAll 
+- getById 
+- create 
+- update 
+- delete 
+
+#### Endereço
+
+- getAll 
+- getById 
+- create 
+- update 
+- delete 
+
+#### Evento
+
+- getAll 
+- getById 
+- create 
+- update 
+- delete 
+
+#### Task
+
+- getAll 
+- getById 
+- create 
+- update 
+- delete 
+
+#### Anotação
+
+- getAll 
+- getById 
+- create 
+- update
+- delete 
 
 ### 3.2. Arquitetura (Semana 5)
 
-*Posicione aqui o diagrama de arquitetura da sua solução de aplicação web. Atualize sempre que necessário.*
+Um diagrama de arquitetura é uma representação visual que mostra como os principais componentes de um sistema estão organizados e como eles se relacionam entre si.
 
-**Instruções para criação do diagrama de arquitetura**  
-- **Model**: A camada que lida com a lógica de negócios e interage com o banco de dados.
-- **View**: A camada responsável pela interface de usuário.
-- **Controller**: A camada que recebe as requisições, processa as ações e atualiza o modelo e a visualização.
-  
-*Adicione as setas e explicações sobre como os dados fluem entre o Model, Controller e View.*
+<div align= "center">
+<img src="../assets/Diagrama de arquetetura.png">
+</div>
 
 ### 3.3. Wireframes (Semana 03)
 
