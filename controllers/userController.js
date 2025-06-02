@@ -26,7 +26,7 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const newUser = await userService.createUser(name, email);
+    const newUser = await userService.createUser(nome, nascimento, email, senha);
     res.status(201).json(newUser);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -35,7 +35,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const updatedUser = await userService.updateUser(req.params.id, name, email);
+    const updatedUser = await userService.updateUser(req.params.id, nome, nascimento, email, senha);
     if (updatedUser) {
       res.status(200).json(updatedUser);
     } else {
