@@ -15,7 +15,16 @@ db.connect()
     app.use('/users', userRoutes);
 
     const enderecoRoutes = require('./routes/enderecoRoute');
-    app.use('/endereco', enderecoRoutes);
+    app.use('/enderecos', enderecoRoutes);
+
+    const taskRoutes = require('./routes/taskRoute');
+    app.use('/tasks', taskRoutes);
+
+    const eventoRoutes = require('./routes/eventoRoute');
+    app.use('/eventos', eventoRoutes);
+
+    const anotacaoRoutes = require('./routes/anotacaoRoute');
+    app.use('/anotacaos', anotacaoRoutes);
 
     const frontendRoutes = require('./routes/frontRoute');
     app.use('/', frontendRoutes);
