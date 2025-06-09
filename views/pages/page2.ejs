@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/CSS/style.css" />
+  <title>SchaduleUP - Cadastro</title>
+</head>
+
+<style>
+    /* Reset e base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+    height: 100%;
+}
+
+/* Fundo */
+.background {
+    background-color: #f7f6df;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Caixa */
+.login-box {
+    background-color: #75cba2;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Logo + Título */
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-title img {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-title h1 {
+    font-size: 22px;
+}
+
+/* Subtítulo */
+.login-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    margin: 10px 0;
+    background-color: #c0e1c5;
+    font-size: 14px;
+}
+
+/* Botão */
+.login-box button {
+    background-color: #c3e521;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+    background-color: #afcf1e;
+}
+
+</style>
+
+<body>
+  <div class="background">
+    <div class="login-box">
+      <div class="logo-title">
+        <img src="/views/assets/Logo.svg" alt="Logo" />
+        <h1>SchaduleUP</h1>
+      </div>
+
+      <h2>Cadastrar</h2>
+
+      <form action="/cadastro" method="POST">
+        <input type="text" id="nome" name="nome" placeholder="Nome" required />
+        <input type="date" id="nascimento" name="nascimento" placeholder="Nascimento" required />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="password" id="senha" name="senha" placeholder="senha" required />
+        <button type="submit">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

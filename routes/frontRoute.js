@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/about', (req, res) => {
+router.get('/cadastro', (req, res) => {
   res.render(path.join(__dirname, '../views/layout/main'), {
     pageTitle: 'Página Inicial',
     content: path.join(__dirname, '../views/pages/page2')
