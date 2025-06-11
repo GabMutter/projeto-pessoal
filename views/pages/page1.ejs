@@ -9,125 +9,123 @@
 </head>
 
 <style>
-    /* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-body, html {
-    height: 100%;
-}
+    body,
+    html {
+        height: 100%;
+    }
 
-/* Fundo amarelo claro */
-.background {
-    background-color: #f7f6df;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .background {
+        background-color: #f7f6df;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-/* Caixa verde arredondada */
-.login-box {
-    background-color: #75cba2;
-    padding: 40px 30px;
-    border-radius: 20px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+    .login-box {
+        background-color: #75cba2;
+        padding: 40px 30px;
+        border-radius: 20px;
+        width: 300px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-/* Logo + Título */
-.logo-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
+    .logo-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
 
-.logo-title img {
-    width: 40px;
-    height: 40px;
-}
+    .logo-title img {
+        width: 40px;
+        height: 40px;
+    }
 
-.logo-title h1 {
-    font-size: 22px;
-}
+    .logo-title h1 {
+        font-size: 22px;
+    }
 
-/* Subtítulo "Login" */
-.login-box h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
+    .login-box h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
 
-/* Inputs */
-.login-box input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 25px;
-    border: none;
-    margin: 10px 0;
-    background-color: #c0e1c5;
-    font-size: 14px;
-}
+    .login-box input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 25px;
+        border: none;
+        margin: 10px 0;
+        background-color: #c0e1c5;
+        font-size: 14px;
+    }
 
-/* Botão */
-.login-box button {
-    background-color: #c3e521;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
+    .login-box button {
+        background-color: #c3e521;
+        color: black;
+        font-weight: bold;
+        border: none;
+        border-radius: 15px;
+        padding: 10px 20px;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
 
-.login-box button:hover {
-    background-color: #afcf1e;
-}
+    .login-box button:hover {
+        background-color: #afcf1e;
+    }
 
-/* Link de cadastro */
-.signup-link {
-    margin-top: 15px;
-    font-size: 12px;
-}
+    .signup-link {
+        margin-top: 15px;
+        font-size: 12px;
+    }
 
-.signup-link a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    font-size: 11px;
-}
+    .signup-link a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 11px;
+    }
 
-.titulo {
-    font-size: 24px;
-    color: #333;
-}
+    .signup-link a:hover {
+        text-decoration: underline;
+    }
 
-.subtitulo {
-    font-size: 18px;
-    color: #333;
-}
+    .titulo {
+        font-size: 24px;
+        color: #333;
+    }
 
+    .subtitulo {
+        font-size: 18px;
+        color: #333;
+    }
 </style>
 
 <body>
     <div class="background">
         <div class="login-box">
             <div class="logo-title">
-                <img src="/views/assets/Logo.svg" alt="Logo">
+                <img src="
+                
+                /assets/Logo.svg" alt="Logo">
                 <h1 class="titulo">SchaduleUP</h1>
             </div>
 
             <h3 class="subtitulo">Login</h3>
 
-            <form action="/login" method="POST">
+            <form action="/users" method="GET">
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <input type="password" id="senha" name="senha" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
