@@ -23,7 +23,7 @@ const getUserById = async (id) => {
 };
 
 // Função para criar um novo usuário
-const createUser = async (name, email) => {
+const createUser = async (nome, nascimento, email, senha) => {
   try {
     const result = await db.query(
       'INSERT INTO usuarios (nome, nascimento, email, senha) VALUES ($1, $2, $3, $4) RETURNING *',
@@ -36,7 +36,7 @@ const createUser = async (name, email) => {
 };
 
 // Função para atualizar um usuário por ID
-const updateUser = async (id, name, email) => {
+const updateUser = async (id, nome, nascimento, email, senha) => {
   try {
     const result = await db.query(
       'UPDATE usuarios SET nome = $1, nascimento = $2, email = $3, senha = $4 WHERE id = $5 RETURNING *',
@@ -51,10 +51,20 @@ const updateUser = async (id, name, email) => {
 // Função para deletar um usuário por ID
 const deleteUser = async (id) => {
   try {
-    const result = await db.query('DELETE FROM users WHERE id = $1 RETURNING *', [id]);
+    const result = await db.query('DELETE FROM usuarios WHERE id = $1 RETURNING *', [id]);
     return result.rows[0];
   } catch (error) {
     throw new Error('Erro ao deletar usuário: ' + error.message);
+  }
+};
+
+// Função para obter um usuário por email
+const getUserByEmail = async (email) => {
+  try {
+    const result = await db.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Erro ao obter usuário por email: ' + error.message);
   }
 };
 
@@ -63,5 +73,6 @@ module.exports = {
   getUserById,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getUserByEmail
 };

@@ -19,6 +19,14 @@ class User {
     return result.rows[0];
   }
 
+  static async loginUsuario(email, senha) {
+    const result = await db.query(
+      'SELECT * FROM usuarios WHERE email = $1 AND senha = $2',
+      [email, senha]
+    );
+    return result.rows[0];
+  }
+
   static async updateUser(id, data) {
     const result = await db.query(
       'UPDATE usuarios SET nome = $1, nascimento = $2, email = $3, senha = $4 WHERE id = $5 RETURNING *',

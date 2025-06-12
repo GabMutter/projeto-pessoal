@@ -125,15 +125,60 @@
 
             <h3 class="subtitulo">Login</h3>
 
-            <form action="/users" method="GET">
+            <form id="loginForm">
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <input type="password" id="senha" name="senha" placeholder="Senha" required>
                 <button type="submit">Entrar</button>
             </form>
+            <p id="errorMessage" style="color: red; margin-top: 10px;"></p>
 
             <p class="signup-link">Não tem login ainda? <a href="/cadastro">cadastre-se</a></p>
         </div>
     </div>
 </body>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('senha');
+            const errorMessageElement = document.getElementById('errorMessage');
+
+            const email = emailInput.value.trim();
+            const senha = passwordInput.value.trim();
+
+            errorMessageElement.textContent = '';
+
+            fetch('/usuarios/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, senha })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao fazer login');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/frontRoute/home';
+                } else {
+                    errorMessageElement.textContent = data.message || 'Email ou senha inválidos.';
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                errorMessageElement.textContent = 'Ocorreu um erro ao tentar fazer login.';
+            });
+        });
+    }
+});
+</script>
 
 </html>

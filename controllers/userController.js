@@ -1,6 +1,7 @@
 // controllers/userController.js
 
 const userService = require('../services/userService');
+const userModel = require('../models/userModel');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -26,15 +27,34 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const newUser = await userService.createUser(nome, nascimento, email, senha);
-    res.status(201).json(newUser);
+    const { nome, nascimento, email, senha } = req.body;
+    await userService.createUser(nome, nascimento, email, senha);
+    res.redirect('/login');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+const loginUser = async (req, res) => {
+  try {
+    const { email, senha } = req.body;
+    console.log('Login recebido:', email, senha);
+    const user = await userService.getUserByEmail(email);
+    console.log('Usuário retornado:', user);
+    if (user && user.senha === senha) {
+      res.json({ success: true });
+    } else {
+      res.json({ success: false, message: 'Email ou senha inválidos.' });
+    }
+  } catch (error) {
+    console.error('Erro no login:', error);
+    res.status(500).json({ success: false, message: 'Erro ao fazer login.' });
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
+    const { nome, nascimento, email, senha } = req.body;
     const updatedUser = await userService.updateUser(req.params.id, nome, nascimento, email, senha);
     if (updatedUser) {
       res.status(200).json(updatedUser);
@@ -61,6 +81,7 @@ const deleteUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
+  loginUser,
   getUserById,
   createUser,
   updateUser,

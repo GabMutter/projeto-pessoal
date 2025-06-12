@@ -3,7 +3,7 @@ const router = express.Router();
 const path = require('path');
 
 // Roteamento para páginas dinâmicas
-router.get('/', (req, res) => {
+router.get('/login', (req, res) => {
   res.render(path.join(__dirname, '../views/layout/main'), {
     pageTitle: 'Página Login',
     content: path.join(__dirname, '../views/pages/page1')

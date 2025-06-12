@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS usuarios (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     nascimento DATE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -7,14 +7,14 @@ CREATE TABLE IF NOT EXISTS usuarios (
 );
 
 CREATE TABLE IF NOT EXISTS enderecos (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     rua VARCHAR(100) NOT NULL,
     numero INT NOT NULL,
     bairro VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS eventos (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
     descricao TEXT,
     data_inicio DATE NOT NULL,
@@ -26,18 +26,8 @@ CREATE TABLE IF NOT EXISTS eventos (
     FOREIGN KEY (id_endereco) REFERENCES enderecos(id)
 );
 
-CREATE TABLE IF NOT EXISTS anotacaos (
-    id INT PRIMARY KEY,
-    titulo VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    id_task INT,
-    id_evento INT,
-    FOREIGN KEY (id_task) REFERENCES tasks(id)
-    FOREIGN KEY (id_evento) REFERENCES eventos(id)
-);
-
 CREATE TABLE IF NOT EXISTS tasks (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
     confirmar BOOLEAN,
     data DATE NOT NULL,
@@ -45,9 +35,22 @@ CREATE TABLE IF NOT EXISTS tasks (
     id_evento INT,
     id_anotacao INT,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
-    FOREIGN KEY (id_evento) REFERENCES eventos(id),
-    FOREIGN KEY (id_anotacao) REFERENCES anotacaos(id)
+    FOREIGN KEY (id_evento) REFERENCES eventos(id)
 );
+
+CREATE TABLE IF NOT EXISTS anotacaos (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    id_task INT,
+    id_evento INT,
+    FOREIGN KEY (id_task) REFERENCES tasks(id),
+    FOREIGN KEY (id_evento) REFERENCES eventos(id)
+);
+
+ALTER TABLE tasks
+    ADD CONSTRAINT fk_tasks_anotacao
+    FOREIGN KEY (id_anotacao) REFERENCES anotacaos(id);
 
 INSERT INTO usuarios (id, nome, nascimento, email, senha) VALUES
 (1, 'João da Silva', '1990-05-12', 'joao.silva@email.com', 'senha123'),
@@ -83,3 +86,5 @@ INSERT INTO tasks (id, titulo, confirmar, data, id_usuario, id_evento, id_anotac
 (3, 'Comprar bolo', TRUE, '2025-07-09', 4, 3, 3),
 (4, 'Assistir palestra', FALSE, '2025-06-15', 5, 4, 4),
 (5, 'Testar sistema', TRUE, '2025-06-19', 1, 5, 5);
+
+SELECT setval('usuarios_id_seq', (SELECT MAX(id) FROM usuarios));

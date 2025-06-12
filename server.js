@@ -44,3 +44,5 @@ db.connect()
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
+
+  app.use(express.urlencoded({ extended: true }));
