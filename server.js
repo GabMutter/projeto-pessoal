@@ -7,12 +7,22 @@ const path = require('path');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Set up static file serving
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'views/assets')));
+app.use('/css', express.static(path.join(__dirname, 'views/CSS')));
+app.use('/views/CSS', express.static(path.join(__dirname, 'views/CSS'))); // For backward compatibility
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 db.connect()
   .then(() => {
     console.log('Conectado ao banco de dados PostgreSQL');
 
     const userRoutes = require('./routes/userRoute');
     app.use('/users', userRoutes);
+    app.use('/usuarios', userRoutes); // Add alias for backward compatibility
 
     const enderecoRoutes = require('./routes/enderecoRoute');
     app.use('/enderecos', enderecoRoutes);
@@ -29,8 +39,6 @@ db.connect()
     const frontendRoutes = require('./routes/frontRoute');
     app.use('/', frontendRoutes);
 
-    app.use(express.json());
-
     app.use((err, req, res, next) => {
       console.error(err.stack);
       res.status(500).send('Erro no servidor');
@@ -44,5 +52,3 @@ db.connect()
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
-
-  app.use(express.urlencoded({ extended: true }));

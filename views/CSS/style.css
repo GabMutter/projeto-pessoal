@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f0d7;
+    padding: 20px;
+    color: #333;
+}
+
+/* Common styles */
+.background {
+    background-color: #f7f6df;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+    background-color: transparent;
+}
+
+header img {
+    height: 40px;
+}
+
+header input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #c1ff88;
+    font-size: 16px;
+}
+
+header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+header button img {
+    width: 25px;
+    height: 25px;
+}
+
+/* Login box styles */
+.login-box {
+    background-color: #75cba2;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-title img {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-title h1 {
+    font-size: 22px;
+}
+
+.login-box h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    margin: 10px 0;
+    background-color: #c0e1c5;
+    font-size: 14px;
+}
+
+.login-box button {
+    background-color: #c3e521;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+    background-color: #afcf1e;
+}
+
+.signup-link {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.signup-link a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.titulo {
+    font-size: 24px;
+    color: #333;
+}
+
+.subtitulo {
+    font-size: 18px;
+    color: #333;
+}

@@ -42,7 +42,7 @@ const loginUser = async (req, res) => {
     const user = await userService.getUserByEmail(email);
     console.log('Usuário retornado:', user);
     if (user && user.senha === senha) {
-      res.json({ success: true });
+      res.json({ success: true, redirect: '/home' });
     } else {
       res.json({ success: false, message: 'Email ou senha inválidos.' });
     }
