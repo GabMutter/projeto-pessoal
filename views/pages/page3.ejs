@@ -353,11 +353,10 @@
     font-size: 14px;
     color: #444;
   }
-
-  
 </style>
 
-<body>  <header>
+<body>
+  <header>
     <img src="/assets/Logo.svg" alt="Logo">
     <input type="text" placeholder="O que você procura?">
     <button><img src="/assets/notifications.svg" alt="Notificações"></button>
@@ -398,33 +397,36 @@
         <div class="line"></div>
       </div>
     </div>
-    <div class="popup-overlay" id="popup-anotacao">
-      <div class="popup">
-        <h2>Anotação</h2>
 
-        <input type="text" placeholder="Título da anotação" class="popup-titulo" required>
+    <form action="/anotacaos" method="post">
+      <div class="popup-overlay" id="popup-anotacao">
+        <div class="popup">
+          <h2>Anotação</h2>
+          <input type="text" placeholder="Título da anotação" class="popup-titulo" required>
 
-        <input type="date" class="popup-data" required>
+          <input type="date" class="popup-data" required>
 
-        <textarea placeholder="Digite sua anotação aqui..." required></textarea>
+          <textarea placeholder="Digite sua anotação aqui..." required></textarea>
 
-        <button class="popup-criar">Criar</button>
+          <button type="submit" class="popup-criar">Criar</button>
+        </div>
       </div>
-    </div>
-    <div class="popup-overlay" id="popup-task">
-      <div class="popup">
-        <h2>Task</h2>
+    </form>
+    <form action="/tasks" method="post">
+      <div class="popup-overlay" id="popup-task">
+        <div class="popup">
+          <h2>Task</h2>
 
-        <input type="text" placeholder="Título da task" class="popup-titulo" required>
+          <input type="text" placeholder="Título da task" class="popup-titulo" required>
 
-        <h5>Data final</h5>
-        <input type="date" class="popup-data" required>
+          <h5>Data final</h5>
+          <input type="date" class="popup-data" required>
 
-        <input type="text" placeholder="Observações (opcional)" class="popup-observacao">
+          <button type="submit" class="popup-criar">Criar</button>
 
-        <button class="popup-criar">Criar</button>
+        </div>
       </div>
-    </div>
+    </form>
     <div class="conteudo-criado">
       <div id="anotacoes"></div>
       <div id="tasks"></div>
