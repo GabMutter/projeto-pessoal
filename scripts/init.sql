@@ -29,23 +29,16 @@ CREATE TABLE IF NOT EXISTS eventos (
 CREATE TABLE IF NOT EXISTS tasks (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
-    confirmar BOOLEAN,
     data DATE NOT NULL,
     id_usuario INT NOT NULL,
-    id_evento INT,
     id_anotacao INT,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
-    FOREIGN KEY (id_evento) REFERENCES eventos(id)
 );
 
 CREATE TABLE IF NOT EXISTS anotacaos (
     id SERIAL PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    id_task INT,
-    id_evento INT,
-    FOREIGN KEY (id_task) REFERENCES tasks(id),
-    FOREIGN KEY (id_evento) REFERENCES eventos(id)
+    descricao TEXT NOT NULL,
 );
 
 ALTER TABLE tasks
@@ -80,11 +73,12 @@ INSERT INTO anotacaos (id, titulo, descricao, id_task, id_evento) VALUES
 (4, 'Dicas de Marketing', 'Anotar ferramentas mencionadas', NULL, 4),
 (5, 'Checklist do Projeto', 'Testar login, cadastro e agendamentos', NULL, 5);
 
-INSERT INTO tasks (id, titulo, confirmar, data, id_usuario, id_evento, id_anotacao) VALUES
-(1, 'Preparar apresentação', TRUE, '2025-05-30', 1, 1, 1),
-(2, 'Imprimir exames', FALSE, '2025-06-02', 2, 2, 2),
-(3, 'Comprar bolo', TRUE, '2025-07-09', 4, 3, 3),
-(4, 'Assistir palestra', FALSE, '2025-06-15', 5, 4, 4),
-(5, 'Testar sistema', TRUE, '2025-06-19', 1, 5, 5);
+INSERT INTO tasks (id, titulo, data, id_usuario, id_anotacao) VALUES
+(1, 'Preparar apresentação', '2025-05-30', 1, 1),
+(2, 'Imprimir exames', '2025-06-02', 2, 2),
+(3, 'Comprar bolo', '2025-07-09', 4, 3),
+(4, 'Assistir palestra', '2025-06-15', 5, 4),
+(5, 'Testar sistema', '2025-06-19', 1, 5);
 
 SELECT setval('usuarios_id_seq', (SELECT MAX(id) FROM usuarios));
+SELECT setval('tasks_id_seq', (SELECT MAX(id) FROM tasks));

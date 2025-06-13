@@ -402,11 +402,13 @@
       <div class="popup-overlay" id="popup-anotacao">
         <div class="popup">
           <h2>Anotação</h2>
-          <input type="text" placeholder="Título da anotação" class="popup-titulo" required>
+          <input type="text" name="titulo" placeholder="Título da anotação" class="popup-titulo" required>
 
-          <input type="date" class="popup-data" required>
+          <input type="date" name="data" class="popup-data" required>
 
-          <textarea placeholder="Digite sua anotação aqui..." required></textarea>
+          <textarea name="texto" placeholder="Digite sua anotação aqui..." required></textarea>
+
+          <input type="hidden" name="id_usuario" value="1">
 
           <button type="submit" class="popup-criar">Criar</button>
         </div>
@@ -417,10 +419,12 @@
         <div class="popup">
           <h2>Task</h2>
 
-          <input type="text" placeholder="Título da task" class="popup-titulo" required>
+          <input type="text" name="titulo" placeholder="Título da task" class="popup-titulo" required>
 
           <h5>Data final</h5>
-          <input type="date" class="popup-data" required>
+          <input type="date" name="data" class="popup-data" required>
+
+          <input type="hidden" name="id_usuario" value="1">
 
           <button type="submit" class="popup-criar">Criar</button>
 
@@ -503,6 +507,62 @@
       }
     });
 
+    // Carregar tasks existentes quando a página carregar
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('/tasks')
+        .then(response => response.json())
+        .then(tasks => {
+          const container = document.getElementById('tasks');
+          tasks.forEach(task => {
+            const box = createTaskBox(task);
+            container.appendChild(box);
+          });
+        })
+        .catch(error => console.error('Erro ao carregar tasks:', error));
+    });
+
+    // Função para criar o elemento visual da task
+    function createTaskBox(task) {
+      const box = document.createElement('div');
+      box.classList.add('task-box');
+      box.innerHTML = `
+        <div class="task-title">${task.titulo}</div>
+        <div class="task-date">${new Date(task.data).toLocaleDateString('pt-BR')}</div>
+      `;
+      return box;
+    }
+
+    // Modificar o comportamento do formulário para usar AJAX
+    document.querySelector('form[action="/tasks"]').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = {
+        titulo: formData.get('titulo'),
+        data: formData.get('data'),
+        id_usuario: formData.get('id_usuario')
+      };
+
+      fetch('/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(task => {
+        const container = document.getElementById('tasks');
+        const box = createTaskBox(task);
+        container.appendChild(box);
+        
+        // Limpar e fechar o formulário
+        this.reset();
+        document.getElementById('popup-task').style.display = 'none';
+      })
+      .catch(error => console.error('Erro ao criar task:', error));
+    });
+
     // Criação de Anotação
     document.querySelector('#popup-anotacao .popup-criar').addEventListener('click', () => {
       const titulo = document.querySelector('#popup-anotacao .popup-titulo').value.trim();
@@ -523,29 +583,6 @@
 
         container.appendChild(box);
         document.getElementById('popup-anotacao').style.display = 'none';
-      }
-    });
-
-    // Criação de Task
-    document.querySelector('#popup-task .popup-criar').addEventListener('click', () => {
-      const titulo = document.querySelector('#popup-task .popup-titulo').value.trim();
-      const data = document.querySelector('#popup-task .popup-data').value;
-      const obs = document.querySelector('#popup-task .popup-observacao').value.trim();
-
-      if (titulo && data) {
-        const container = document.getElementById('tasks');
-
-        const box = document.createElement('div');
-        box.classList.add('task-box');
-
-        box.innerHTML = `
-        <div class="task-title">${titulo}</div>
-        <div class="task-date">${new Date(data).toLocaleDateString('pt-BR')}</div>
-        ${obs ? `<div class="task-notes">${obs}</div>` : ''}
-      `;
-
-        container.appendChild(box);
-        document.getElementById('popup-task').style.display = 'none';
       }
     });
 
