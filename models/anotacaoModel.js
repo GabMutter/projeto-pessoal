@@ -13,16 +13,16 @@ class Anotacao {
 
   static async create(data) {
     const result = await db.query(
-      `INSERT INTO anotacaos (titulo, descricao, id_task, id_evento) VALUES ($1, $2, $3, $4) RETURNING *`,
-      [data.titulo, data.descricao, data.id_task, data.id_evento]
+      `INSERT INTO anotacaos (titulo, descricao) VALUES ($1, $2) RETURNING *`,
+      [data.titulo, data.descricao]
     );
     return result.rows[0];
   }
 
   static async update(id, data) {
     const result = await db.query(
-      `UPDATE anotacaos SET titulo = $1, descricao = $2, id_task = $3, id_evento = $4 WHERE id = $5 RETURNING *`,
-      [data.titulo, data.descricao, data.id_task, data.id_evento, id]
+      `UPDATE anotacaos SET titulo = $1, descricao = $2 WHERE id = $3 RETURNING *`,
+      [data.titulo, data.descricao, id]
     );
     return result.rows[0];
   }

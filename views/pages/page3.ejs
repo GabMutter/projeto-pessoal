@@ -404,9 +404,7 @@
           <h2>Anotação</h2>
           <input type="text" name="titulo" placeholder="Título da anotação" class="popup-titulo" required>
 
-          <input type="date" name="data" class="popup-data" required>
-
-          <textarea name="texto" placeholder="Digite sua anotação aqui..." required></textarea>
+          <textarea name="descricao" placeholder="Digite sua anotação aqui..." required></textarea>
 
           <input type="hidden" name="id_usuario" value="1">
 
@@ -497,6 +495,63 @@
       }
     });
 
+    // Função para carregar anotações
+    function carregarAnotacoes() {
+      fetch('/anotacaos')
+        .then(response => response.json())
+        .then(anotacoes => {
+          const container = document.getElementById('anotacoes');
+          container.innerHTML = ''; // Limpa o container
+          anotacoes.forEach(anotacao => {
+            const box = document.createElement('div');
+            box.classList.add('anotacao-box');
+            box.innerHTML = `
+              <h3>${anotacao.titulo}</h3>
+              <p>${anotacao.descricao}</p>
+            `;
+            container.appendChild(box);
+          });
+        })
+        .catch(error => console.error('Erro ao carregar anotações:', error));
+    }
+
+    // Carregar anotações ao iniciar
+    carregarAnotacoes();
+
+    // Lidar com o envio do formulário de anotação
+    document.querySelector('form[action="/anotacaos"]').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const titulo = this.querySelector('[name="titulo"]').value;
+      const descricao = this.querySelector('[name="descricao"]').value;
+      
+      fetch('/anotacaos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          titulo: titulo,
+          descricao: descricao
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao criar anotação');
+        }
+        return response.json();
+      })
+      .then(novaAnotacao => {
+        carregarAnotacoes(); // Recarrega todas as anotações
+        this.reset(); // Limpa o formulário
+        document.getElementById('popup-anotacao').style.display = 'none'; // Fecha o popup
+      })
+      .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao criar anotação. Por favor, tente novamente.');
+      });
+    });
+
     document.querySelector('.add-task').addEventListener('click', () => {
       document.getElementById('popup-task').style.display = 'flex';
     });
@@ -566,10 +621,9 @@
     // Criação de Anotação
     document.querySelector('#popup-anotacao .popup-criar').addEventListener('click', () => {
       const titulo = document.querySelector('#popup-anotacao .popup-titulo').value.trim();
-      const data = document.querySelector('#popup-anotacao .popup-data').value;
       const texto = document.querySelector('#popup-anotacao textarea').value.trim();
 
-      if (titulo && data && texto) {
+      if (titulo && texto) {
         const container = document.getElementById('anotacoes');
 
         const box = document.createElement('div');
@@ -577,7 +631,6 @@
 
         box.innerHTML = `
         <h3>${titulo}</h3>
-        <span>${new Date(data).toLocaleDateString('pt-BR')}</span>
         <p>${texto}</p>
       `;
 
@@ -585,6 +638,64 @@
         document.getElementById('popup-anotacao').style.display = 'none';
       }
     });
+
+    // Código específico para anotações
+    function carregarAnotacoes() {
+      fetch('/anotacaos')
+        .then(response => response.json())
+        .then(anotacoes => {
+          const container = document.getElementById('anotacoes');
+          container.innerHTML = ''; // Limpa o container antes de adicionar
+          anotacoes.forEach(anotacao => {
+            const box = document.createElement('div');
+            box.classList.add('anotacao-box');
+            box.innerHTML = `
+              <h3>${anotacao.titulo}</h3>
+              <p>${anotacao.descricao}</p>
+            `;
+            container.appendChild(box);
+          });
+        })
+        .catch(error => console.error('Erro ao carregar anotações:', error));
+    }
+
+    // Carregar anotações quando a página iniciar
+    document.addEventListener('DOMContentLoaded', function() {
+      carregarAnotacoes();
+    });
+
+    // Manipular o formulário de anotações
+    const formAnotacao = document.querySelector('form[action="/anotacaos"]');
+    if (formAnotacao) {
+      formAnotacao.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const data = {
+          titulo: formData.get('titulo'),
+          descricao: formData.get('descricao'),
+          id_usuario: formData.get('id_usuario')
+        };
+
+        fetch('/anotacaos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(novaAnotacao => {
+          // Recarregar todas as anotações
+          carregarAnotacoes();
+          
+          // Limpar e fechar o formulário
+          this.reset();
+          document.getElementById('popup-anotacao').style.display = 'none';
+        })
+        .catch(error => console.error('Erro ao criar anotação:', error));
+      });
+    }
 
   </script>
 </body>
